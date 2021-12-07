@@ -2,12 +2,12 @@ import { LinkedListNode } from "./linkedListNode";
 
 export class LinkedList<T> {
   constructor(
-    public head: LinkedListNode<T> | null,
-    public tail: LinkedListNode<T> | null
+    public head?: LinkedListNode<T>,
+    public tail?: LinkedListNode<T>
   ) {}
 
   append(node: LinkedListNode<T>) {
-    if (this.head === null || this.tail === null) {
+    if (this.head === undefined || this.tail === undefined) {
       this.tail = node;
       this.head = node;
       return this;
@@ -19,7 +19,7 @@ export class LinkedList<T> {
   }
 
   delete(node: LinkedListNode<T>) {
-    if (this.head === null) {
+    if (this.head === undefined) {
       throw new Error("Cannot delete element from empty list.");
     }
 
