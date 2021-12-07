@@ -1,13 +1,15 @@
 import { BinaryTreeTraversalCallbacks } from "./types";
 import { BinaryTreeNode } from "./../../data_structures/binary_tree/binaryTreeNode";
+import { Stack } from "../../data_structures/stack/stack";
 
 export function depthFirstSearch<T>(
   binaryTreeRoot: BinaryTreeNode<T>,
   callbacks: BinaryTreeTraversalCallbacks<T>
 ) {
-  const stack = [binaryTreeRoot];
+  const stack = new Stack<BinaryTreeNode<T>>();
+  stack.push(binaryTreeRoot);
 
-  while (stack.length > 0) {
+  while (!stack.isEmpty()) {
     const binaryTreeNode = stack.pop()!;
 
     callbacks.onNodeEnter && callbacks.onNodeEnter(binaryTreeNode);
