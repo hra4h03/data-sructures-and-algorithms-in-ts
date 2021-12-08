@@ -16,8 +16,7 @@ export class Queue<T> {
   }
 
   enqueue(value: T) {
-    const node = new LinkedListNode(value);
-    this.linkedList.append(node);
+    this.linkedList.append(value);
   }
 
   isEmpty() {
