@@ -1,5 +1,4 @@
 import { LinkedList } from "../linked_list/linkedList";
-import { LinkedListNode } from "../linked_list/linkedListNode";
 
 type HashTableNode<T> = {
   key: string;
@@ -65,9 +64,3 @@ export class HashTable<T> {
     return node.value;
   }
 }
-
-const hashTable = new HashTable(3);
-hashTable.set("A", 8);
-hashTable.set("C", 4);
-
-console.log(hashTable.get("C"));
