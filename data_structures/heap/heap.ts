@@ -72,7 +72,7 @@ export abstract class Heap<T> {
     const parent = this.container[parentIndex];
     const child = this.container[index];
 
-    if (this.isCorrectOrder(parent, child)) {
+    if (!this.isCorrectOrder(parent, child)) {
       this.swap(parentIndex, index);
       this.heapifyUp(parentIndex);
     }
@@ -98,7 +98,7 @@ export abstract class Heap<T> {
       throw new Error();
     })();
 
-    if (this.isCorrectOrder(parent, minimumChild)) {
+    if (!this.isCorrectOrder(parent, minimumChild)) {
       this.swap(minimumChildIndex, index);
       this.heapifyDown(minimumChildIndex);
     }
