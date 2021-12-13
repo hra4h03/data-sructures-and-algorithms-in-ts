@@ -1,10 +1,13 @@
-type CheckOrderFunction<T> = (parent: T, child: T) => boolean;
+import { Comparator } from "./../../helpers/comparator";
+import { Compare } from "../../helpers/comparator";
 
-export abstract class Heap {
-  container: number[];
+export abstract class Heap<T> {
+  container: T[];
+  comparator: Comparator<T>;
 
-  constructor(private checkOrder: CheckOrderFunction<number>) {
+  constructor(compare: Compare<T>) {
     this.container = [];
+    this.comparator = new Comparator(compare);
   }
 
   isEmpty() {
@@ -31,7 +34,7 @@ export abstract class Heap {
     return firstElement;
   }
 
-  insert(value: number) {
+  insert(value: T) {
     this.container.push(value);
     this.heapifyUp(this.container.length - 1);
   }
@@ -60,12 +63,16 @@ export abstract class Heap {
     return this.container[this.getRightChildIndex(index)];
   }
 
+  isCorrectOrder(first: T, second: T): boolean {
+    throw new Error("Please implement this method.");
+  }
+
   private heapifyUp(index: number) {
     const parentIndex = this.getParentIndex(index);
     const parent = this.container[parentIndex];
     const child = this.container[index];
 
-    if (this.checkOrder(parent, child)) {
+    if (this.isCorrectOrder(parent, child)) {
       this.swap(parentIndex, index);
       this.heapifyUp(parentIndex);
     }
@@ -76,21 +83,22 @@ export abstract class Heap {
     const rightChildIndex = this.getRightChildIndex(index);
 
     const parent = this.container[index];
-    const minimumChild = Math.min(
+    const minimumChild = [
       this.container[leftChildIndex],
-      this.container[rightChildIndex]
-    );
+      this.container[rightChildIndex],
+    ].sort(this.comparator.compare)[0];
 
     const minimumChildIndex = (() => {
       const leftChild = this.getLeftChild(index);
       const rightChild = this.getRightChild(index);
 
-      if (minimumChild === leftChild) return leftChildIndex;
-      if (minimumChild === rightChild) return rightChildIndex;
+      if (this.comparator.equal(minimumChild, leftChild)) return leftChildIndex;
+      if (this.comparator.equal(minimumChild, rightChild))
+        return rightChildIndex;
       throw new Error();
     })();
 
-    if (this.checkOrder(parent, minimumChild)) {
+    if (this.isCorrectOrder(parent, minimumChild)) {
       this.swap(minimumChildIndex, index);
       this.heapifyDown(minimumChildIndex);
     }
