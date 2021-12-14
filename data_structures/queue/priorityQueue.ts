@@ -24,6 +24,15 @@ export class PriorityQueue<T> {
     return this.heap.isEmpty();
   }
 
+  size() {
+    return this.heap.size();
+  }
+
+  getPriority(item: T): number {
+    const priority = this.priorities.get(item);
+    return priority ?? 0;
+  }
+
   add(item: T, priority = 1) {
     this.priorities.set(item, priority);
     this.heap.insert(item);

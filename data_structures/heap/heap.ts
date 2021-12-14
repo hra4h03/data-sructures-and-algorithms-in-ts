@@ -14,6 +14,10 @@ export abstract class Heap<T> {
     return this.container.length === 0;
   }
 
+  size() {
+    return this.container.length;
+  }
+
   peek() {
     return this.container[0];
   }
@@ -21,6 +25,10 @@ export abstract class Heap<T> {
   pop() {
     if (this.isEmpty()) {
       throw new Error("Cannot pop an element from empty heap.");
+    }
+
+    if (this.container.length === 1) {
+      return this.container.pop()!;
     }
 
     const headIndex = 0;
