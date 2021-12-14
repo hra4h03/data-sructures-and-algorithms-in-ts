@@ -1,6 +1,6 @@
 class FixedSizeArray<T> extends Array<T> {}
 
-class DynamicArray<T> {
+export class DynamicArray<T> {
   private count: number;
   private size: number;
   private array: FixedSizeArray<T>;
@@ -8,7 +8,7 @@ class DynamicArray<T> {
   constructor() {
     this.count = 0;
     this.size = 1;
-    this.array = new FixedSizeArray(this.size);
+    this.array = new FixedSizeArray();
   }
 
   isEmpty() {
