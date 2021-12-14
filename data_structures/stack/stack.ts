@@ -1,5 +1,7 @@
+import { DynamicArray } from "../dynamic_array/dynamicArray";
+
 export class Stack<T> {
-  dynamicArray = new DynamicArray<T>();
+  private dynamicArray = new DynamicArray<T>();
 
   pop() {
     return this.dynamicArray.pop();
@@ -10,7 +12,7 @@ export class Stack<T> {
   }
 
   isEmpty() {
-    return !this.dynamicArray.isEmpty();
+    return this.dynamicArray.isEmpty();
   }
 
   peek() {
