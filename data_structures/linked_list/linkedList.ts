@@ -5,8 +5,8 @@ type FindCallback<T> = (node: T, index: number) => boolean;
 
 export class LinkedList<T> {
   constructor(
-    public head?: LinkedListNode<T>,
-    public tail?: LinkedListNode<T>
+    private head?: LinkedListNode<T>,
+    private tail?: LinkedListNode<T>
   ) {}
 
   append(value: T) {
@@ -47,12 +47,16 @@ export class LinkedList<T> {
     }
   }
 
-  delete(node: LinkedListNode<T>) {
+  contains(value: T) {
+    return !!this.find((nodeValue) => nodeValue === value);
+  }
+
+  delete(value: T) {
     if (this.head === undefined) {
       throw new Error("Cannot delete element from empty list.");
     }
 
-    if (node === this.head) {
+    if (value === this.head.value) {
       this.head = this.head.next;
       return this;
     }
@@ -61,7 +65,7 @@ export class LinkedList<T> {
     let currentNode = this.head.next;
 
     while (currentNode) {
-      if (currentNode === node) {
+      if (currentNode.value === value) {
         prevNode.next = currentNode.next;
         return this;
       }
