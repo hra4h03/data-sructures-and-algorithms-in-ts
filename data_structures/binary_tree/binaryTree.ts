@@ -9,6 +9,10 @@ export class BinaryTree<T> {
     this.comparator = new Comparator(compare);
   }
 
+  get height() {
+    return this.root?.height || 0;
+  }
+
   insert(value: T) {
     if (!this.root) {
       this.root = new BinaryTreeNode(value, this.comparator);
@@ -21,5 +25,13 @@ export class BinaryTree<T> {
   contains(value: T) {
     if (!this.root) return false;
     return this.root.contains(value);
+  }
+
+  search(value: T) {
+    return this.root?.search(value);
+  }
+
+  remove(value: T) {
+    return this.root?.remove(value);
   }
 }
