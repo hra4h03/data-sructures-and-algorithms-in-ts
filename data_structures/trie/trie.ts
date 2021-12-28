@@ -1,7 +1,7 @@
 interface TrieNode extends Record<string, TrieNode> {}
 
 export class Trie {
-  root: TrieNode;
+  private root: TrieNode;
 
   constructor() {
     this.root = {
