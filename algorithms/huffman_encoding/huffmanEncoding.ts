@@ -1,6 +1,7 @@
-import { BinaryTreeNode } from "./../../data_structures/binary_tree/binaryTreeNode";
 import { PriorityQueue } from "../../data_structures/queue/priorityQueue";
 import { Stack } from "../../data_structures/stack/stack";
+import { Compare } from "../../helpers/comparator";
+import { BinaryTreeNode } from "./../../data_structures/binary_tree/binaryTreeNode";
 
 function counter(data: string) {
   const counts: Record<string, number> = {};
@@ -38,7 +39,7 @@ function constructCompressedTable(root: BinaryTreeNode<string>) {
 
       stack.push(leftStackNode);
     } else {
-      compressedTable[treeNode.value] = encoding;
+      compressedTable[treeNode.value!] = encoding;
     }
 
     if (treeNode.right) {
@@ -49,7 +50,7 @@ function constructCompressedTable(root: BinaryTreeNode<string>) {
 
       stack.push(rightStackNode);
     } else {
-      compressedTable[treeNode.value] = encoding;
+      compressedTable[treeNode.value!] = encoding;
     }
   }
 
@@ -62,11 +63,17 @@ type HuffmanEncoding = (data: string) => {
 };
 
 export const huffmanEncoding: HuffmanEncoding = (data) => {
+  const compare: Compare<string> = (a, b) => {
+    if (a.localeCompare(b)) return 1;
+    if (b.localeCompare(a)) return -1;
+    return 0;
+  };
+
   const charCounts = counter(data);
   const charPriority = new PriorityQueue<BinaryTreeNode<string>>();
 
   for (const [char, count] of Object.entries(charCounts)) {
-    const charNode = new BinaryTreeNode(char);
+    const charNode = new BinaryTreeNode(char, compare);
     charPriority.add(charNode, count);
   }
 
@@ -78,9 +85,9 @@ export const huffmanEncoding: HuffmanEncoding = (data) => {
       charPriority.getPriority(firstLessFrequentNode) +
       charPriority.getPriority(secondLessFrequentNode);
 
-    const combinedCharNode = new BinaryTreeNode("");
-    combinedCharNode.left = firstLessFrequentNode;
-    combinedCharNode.right = secondLessFrequentNode;
+    const combinedCharNode = new BinaryTreeNode<string>("", compare);
+    combinedCharNode.setLeft(firstLessFrequentNode);
+    combinedCharNode.setRight(secondLessFrequentNode);
 
     charPriority.add(combinedCharNode, combinedPriority);
   }
@@ -89,7 +96,6 @@ export const huffmanEncoding: HuffmanEncoding = (data) => {
   const encodedCharTable = constructCompressedTable(root);
 
   let encoded = "";
-  console.log(charCounts, encodedCharTable);
   for (const char in charCounts) {
     encoded += encodedCharTable[char];
   }
@@ -127,8 +133,3 @@ export function huffmanDecoding(
 
   return decoded;
 }
-
-const { encoded, node: encodingTree } = huffmanEncoding("lorem");
-const decoded = huffmanDecoding(encoded, encodingTree);
-
-console.log(encoded, decoded);

@@ -10,10 +10,9 @@ export class PriorityQueue<T> {
       const firstPriority = this.priorities.get(first)!;
       const secondPriority = this.priorities.get(second)!;
 
-      if (firstPriority === secondPriority) return 0;
-      if (firstPriority > secondPriority) return 1;
-      if (firstPriority < secondPriority) return -1;
-      throw new Error();
+      if (firstPriority < secondPriority) return 1;
+      if (firstPriority > secondPriority) return -1;
+      return 0;
     };
 
     this.heap = new MinHeap(compare);

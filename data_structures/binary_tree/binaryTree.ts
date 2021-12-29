@@ -2,10 +2,10 @@ import { Compare, Comparator } from "./../../helpers/comparator";
 import { BinaryTreeNode } from "./binaryTreeNode";
 
 export class BinaryTree<T> {
-  root?: BinaryTreeNode<T>;
-  comparator: Comparator<T>;
+  protected root?: BinaryTreeNode<T>;
+  protected comparator: Comparator<T>;
 
-  constructor(compare: Compare<T>) {
+  constructor(private compare: Compare<T>) {
     this.comparator = new Comparator(compare);
   }
 
@@ -15,7 +15,7 @@ export class BinaryTree<T> {
 
   insert(value: T) {
     if (!this.root) {
-      this.root = new BinaryTreeNode(value, this.comparator);
+      this.root = new BinaryTreeNode(value, this.compare);
       return;
     }
 

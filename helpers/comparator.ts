@@ -1,6 +1,12 @@
 export type Compare<T> = (a: T, b: T) => 0 | 1 | -1;
 
-export class Comparator<T> {
+export class Comparator<T = number> {
+  static defaultCompare(a: number, b: number) {
+    if (a > b) return 1;
+    if (a < b) return -1;
+    return 0;
+  }
+
   constructor(public compare: Compare<T>) {}
 
   equal(first: T, second: T) {

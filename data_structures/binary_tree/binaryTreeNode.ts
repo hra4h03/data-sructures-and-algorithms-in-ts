@@ -1,11 +1,14 @@
-import { Comparator } from "./../../helpers/comparator";
+import { Comparator, Compare } from "./../../helpers/comparator";
 
 export class BinaryTreeNode<T> {
   public left?: BinaryTreeNode<T>;
   public right?: BinaryTreeNode<T>;
   public parent?: BinaryTreeNode<T>;
+  public comparator: Comparator<T>;
 
-  constructor(public value: T | undefined, public comparator: Comparator<T>) {}
+  constructor(public value: T | undefined, private compare: Compare<T>) {
+    this.comparator = new Comparator(compare);
+  }
 
   get height() {
     return Math.max(this.rightHeight, this.leftHeight);
@@ -42,7 +45,7 @@ export class BinaryTreeNode<T> {
       return this.setValue(value);
     }
 
-    const newNode = new BinaryTreeNode(value, this.comparator);
+    const newNode = new BinaryTreeNode(value, this.compare);
     this.insertNode(newNode);
   }
 
