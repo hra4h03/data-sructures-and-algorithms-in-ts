@@ -1,4 +1,4 @@
-const merge = (firstArray: number[], secondArray: number[]): number[] => {
+export function merge(firstArray: number[], secondArray: number[]): number[] {
   let firstPointer = 0;
   let secondPointer = 0;
 
@@ -31,7 +31,7 @@ const merge = (firstArray: number[], secondArray: number[]): number[] => {
   );
 
   return mergedArray;
-};
+}
 
 export function mergeSort(array: number[]): number[] {
   if (array.length === 1) return array;

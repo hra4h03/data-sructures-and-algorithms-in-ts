@@ -1,5 +1,9 @@
-export function insertionSort(array: number[]): number[] {
-  for (let i = 1; i < array.length; i++) {
+export function insertionSort(
+  array: number[],
+  start = 0,
+  end = array.length
+): number[] {
+  for (let i = start; i < end; i++) {
     let element = array[i];
     let j = i - 1;
 
