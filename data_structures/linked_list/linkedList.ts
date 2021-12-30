@@ -5,8 +5,8 @@ type FindCallback<T> = (node: T, index: number) => boolean;
 
 export class LinkedList<T> {
   constructor(
-    private head?: LinkedListNode<T>,
-    private tail?: LinkedListNode<T>
+    public head?: LinkedListNode<T>,
+    public tail?: LinkedListNode<T>
   ) {}
 
   append(value: T) {
