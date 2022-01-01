@@ -56,6 +56,14 @@ export class Graph<T extends Serializable> {
     delete this.edges[edge.getKey()];
   }
 
+  getEdge(startVertex: GraphVertex<T>, endVertex: GraphVertex<T>) {
+    const edgeKey = GraphEdge.generateKey(startVertex, endVertex);
+    if (this.edges[edgeKey]) return this.edges[edgeKey];
+
+    const reversedEdgeKey = GraphEdge.generateKey(endVertex, startVertex);
+    if (this.edges[reversedEdgeKey]) return this.edges[reversedEdgeKey];
+  }
+
   getAllEdges() {
     return Object.values(this.edges);
   }
