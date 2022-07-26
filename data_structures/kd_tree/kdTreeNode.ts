@@ -66,10 +66,32 @@ export class KDTreeNode<T> {
     this.insertNode(newNode);
   }
 
-  findClosest(value: T[]) {}
+  findClosest(value: T[]): KDTreeNode<T> | undefined {
+    if (!this.value) return;
+    if (this.isPointsEqual(value)) {
+      return this;
+    }
 
-  contains(v: T[]): boolean {
-    const value = v as T[];
+    if (
+      this.comparator.greaterThanOrEqual(
+        value[this.currentDimention],
+        this.value[this.currentDimention]
+      )
+    ) {
+      return this.getLeft()?.findClosest(value);
+    }
+
+    if (
+      this.comparator.lessThan(
+        value[this.currentDimention],
+        this.value[this.currentDimention]
+      )
+    ) {
+      return this.getRight()?.findClosest(value);
+    }
+  }
+
+  contains(value: T[]): boolean {
     if (!this.value) return false;
 
     if (
@@ -219,6 +241,16 @@ export class KDTreeNode<T> {
       this.setLeft(node);
       node.setParent(this);
     }
+  }
+
+  private isPointsEqual(value: T[]) {
+    if (!this.value) return false;
+
+    const isEqual = this.value.every((dimention, axis) =>
+      this.comparator.equal(dimention, value[axis])
+    );
+
+    return isEqual;
   }
 
   private insertNode(node: KDTreeNode<T>): void {
