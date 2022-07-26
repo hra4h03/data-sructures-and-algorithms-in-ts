@@ -1,20 +1,34 @@
 {
   "name": "data-structures-and-algorithms-in-ts",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Collection of Data structures & Algorithms implementation in Typescript.",
+  "main": "index.ts",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Data Structures",
+    "Algorithms",
+    "Typescript",
+    "Sorting",
+    "Searching",
+    "Graphs",
+    "Encoding",
+    "Trees",
+    "Dynamic Array",
+    "Heap",
+    "Queue",
+    "Stack",
+    "Trie"
+  ],
+  "author": "Hrach Hovakimyan",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.12",
-    "jest": "^27.4.5",
-    "ts-jest": "^27.1.2",
-    "typescript": "^4.5.2"
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.6.1",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.7",
+    "typescript": "^4.7.4"
   }
 }
