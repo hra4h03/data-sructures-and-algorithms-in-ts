@@ -1,4 +1,4 @@
-import { LinkedList } from "../linked_list/linkedList";
+import { LinkedList } from "../linked_list/single/linkedList";
 
 type HashTableNode<T> = {
   key: string;

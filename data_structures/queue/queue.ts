@@ -1,5 +1,5 @@
-import { LinkedListNode } from "./../linked_list/linkedListNode";
-import { LinkedList } from "./../linked_list/linkedList";
+import { LinkedListNode } from "./../linked_list/single/linkedListNode";
+import { LinkedList } from "./../linked_list/single/linkedList";
 
 export class Queue<T> {
   linkedList = new LinkedList<T>();
@@ -10,7 +10,7 @@ export class Queue<T> {
     }
 
     const removingHead = this.linkedList.head;
-    this.linkedList.delete(this.linkedList.head);
+    this.linkedList.delete(this.linkedList.head.value);
 
     return removingHead.value;
   }

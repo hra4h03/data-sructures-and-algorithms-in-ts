@@ -1,4 +1,4 @@
-import { LinkedList } from "./../../data_structures/linked_list/linkedList";
+import { LinkedList } from "./../../data_structures/linked_list/single/linkedList";
 
 export function reverseLinkedList<T>(linkedList: LinkedList<T>) {
   let previousNode = undefined;
